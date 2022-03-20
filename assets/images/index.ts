@@ -1,0 +1,1 @@
+export { default as DateIcon } from './svg/DateIcon';
