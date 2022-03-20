@@ -1,5 +1,6 @@
 import { request, gql } from 'graphql-request';
 import { CategoryType } from '../types/CategoryType';
+import { GetPostDetails, GetPostType } from '../types/PostType';
 
 const graphqlAPI = process.env.ENDPOINT_URL as string;
 
@@ -37,7 +38,41 @@ export const getPosts = async () => {
 
   const result = await request(graphqlAPI, query);
 
-  return result.postsConnection.edges;
+  return result.postsConnection.edges as GetPostType[];
+}
+
+export const getPostDetails = async (slug: string) => {
+  const query = gql`
+    query GetPostDetails ($slug: String!) {
+      post (where: { slug: $slug }) {
+        title
+        excerpt
+        featuredImage {
+          url
+        }
+        author{
+          name
+          bio
+          photo {
+            url
+          }
+        }
+        createdAt
+        slug
+        content {
+          raw
+        }
+        categories {
+          name
+          slug
+        }
+      }
+    }
+  `;
+
+  const result = await request(graphqlAPI, query, { slug });
+
+  return result.post as GetPostDetails;
 }
 
 export const getRecentPosts = async () => {

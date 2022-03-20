@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { GetStaticProps } from 'next';
 import type { NextPage } from 'next'
 import { Categories, PostCard, PostWidget } from '../components';
@@ -9,13 +8,9 @@ interface Props {
   posts: GetPostType[];
 }
 
-const Home: NextPage<Props> = ({ posts }) => {
+const HomePage: NextPage<Props> = ({ posts }) => {
   return (
     <div className='container mx-auto px-10 mb-8'>
-      <Head>
-        <title>Blog App</title>
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
       <main className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="lg:col-span-8 col-span-1">
           {posts.map((post, index) => (
@@ -43,4 +38,4 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-export default Home;
+export default HomePage;

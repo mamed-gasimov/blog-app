@@ -8,13 +8,17 @@ export type GetPostNodeType = {
     slug: string;
     title: string;
     excerpt: string;
-    featuredImage: GetPostsNodeImgType;
+    featuredImage: {
+        url: string;
+    };
     categories: GetPostsNodeCategoryType[];
     author: GetPostsNodeAuthorType;
 }
 
-type GetPostsNodeImgType = {
-    url: string;
+export interface GetPostDetails extends GetPostNodeType {
+    content: {
+        raw: string
+    };
 }
 
 type GetPostsNodeCategoryType = {
@@ -22,13 +26,11 @@ type GetPostsNodeCategoryType = {
     slug: string;
 }
 
-type GetPostsNodeAuthorType = {
+export type GetPostsNodeAuthorType = {
     name: string;
     bio: string;
     id: string;
-    photo: GetPostsNodeAuthorPhotoType;
-}
-
-type GetPostsNodeAuthorPhotoType = {
-    url: string;
+    photo: {
+        url: string;
+    };
 }

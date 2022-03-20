@@ -1,9 +1,17 @@
+import { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { FC } from 'react';
-
-const categories = [{ name: 'React', slug: 'react' }, { name: 'Web Development', slug: 'web-dev' }];
+import { getCategories } from '../../services/sendGraphRequest';
+import { CategoryType } from '../../types/CategoryType';
 
 const Header: FC = () => {
+    const [categories, setCategories] = useState<CategoryType[]>([]);
+
+    useEffect(() => {
+        getCategories().then((newCategories: CategoryType[]) => {
+            setCategories(newCategories);
+        });
+    }, []);
+
     return (
         <header className='container mx-auto px-10 mb-8'>
             <div className='border-b w-full inline-block border-blue-400 py-8'>
