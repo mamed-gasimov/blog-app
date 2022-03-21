@@ -4,12 +4,13 @@ import { getCategories } from '../../services/sendGraphRequest';
 import { CategoryType } from '../../types/CategoryType';
 
 const Categories: FC = () => {
-    const [categories, setCategories] = useState<CategoryType[] | undefined>([]);
+    const [categories, setCategories] = useState<CategoryType[]>([]);
 
     useEffect(() => {
-        getCategories().then((newCategories: CategoryType[] | undefined) => {
-            setCategories(newCategories);
-        });
+        getCategories()
+            .then((newCategories) => {
+                setCategories(newCategories as CategoryType[]);
+            }).catch(e => console.log(e));
     }, []);
 
     return (
