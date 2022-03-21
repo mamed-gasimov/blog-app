@@ -4,10 +4,10 @@ import { getCategories } from '../../services/sendGraphRequest';
 import { CategoryType } from '../../types/CategoryType';
 
 const Header: FC = () => {
-    const [categories, setCategories] = useState<CategoryType[]>([]);
+    const [categories, setCategories] = useState<CategoryType[]>();
 
     useEffect(() => {
-        getCategories().then((newCategories: CategoryType[]) => {
+        getCategories().then((newCategories) => {
             setCategories(newCategories);
         });
     }, []);
@@ -21,7 +21,7 @@ const Header: FC = () => {
                     </Link>
                 </div>
                 <div className='hidden md:float-left md:contents'>
-                    {categories.map((category, index) => (
+                    {categories?.map((category, index) => (
                         <Link key={index} href={`/category/${category.slug}`}>
                             <span className='md:float-right mt-2 align-middle text-white ml-4 font-semibold cursor-pointer'>
                                 {category.name}
