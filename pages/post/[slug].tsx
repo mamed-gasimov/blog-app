@@ -1,5 +1,5 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import { Author, Categories, PostDetails, PostWidget } from '../../components';
+import { Author, Categories, PostDetails, PostWidget, CommentsForm, Comments } from '../../components';
 import { getPostDetails, getPosts } from '../../services/sendGraphRequest';
 import { GetPostDetails } from '../../types/PostType';
 
@@ -16,8 +16,8 @@ const PostDetailsPage: NextPage<Props> = ({ post }) => {
                         <PostDetails post={post} />
                         <Author author={post.author} />
                         {/* <AdjacentPosts slug={post.slug} createdAt={post.createdAt} /> */}
-                        {/* <CommentsForm slug={post.slug} /> */}
-                        {/* <Comments slug={post.slug} /> */}
+                        <CommentsForm slug={post.slug} />
+                        <Comments slug={post.slug} />
                     </div>
                     <div className="col-span-1 lg:col-span-4">
                         <div className="relative lg:sticky top-8">
@@ -47,7 +47,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const posts = await getPosts();
-    const postPaths = posts.map(({ node: { slug } }) => ({ params: { slug } }));
+    let postPaths = [{ params: { slug: '' } }];
+    if (posts) {
+        postPaths = posts.map(({ node: { slug } }) => ({ params: { slug } }));
+    }
 
     return {
         paths: postPaths,

@@ -5,3 +5,5 @@ export { default as Header } from './header/Header';
 export { default as Layout } from './layout/Layout';
 export { default as PostDetails } from './postDetails/PostDetails';
 export { default as Author } from './author/Author';
+export { default as Comments } from './comments/Comments';
+export { default as CommentsForm } from './commentsForm/CommentsForm';
