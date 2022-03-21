@@ -33,7 +33,6 @@ const PostWidget: FC<Props> = ({ categories, slug }) => {
                 <div key={index} className='flex items-center w-full mb-4'>
                     <div className='w-16 flex-none'>
                         <Image
-                            // loader={grpahCMSImageLoader}
                             alt={post.title}
                             height='60px'
                             width='60px'
