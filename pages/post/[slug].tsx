@@ -1,6 +1,7 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { Author, Categories, PostDetails, PostWidget, CommentsForm, Comments, Loader } from '../../components';
+import AdjacentPosts from '../../sections/AdjacentPosts';
 import { getPostDetails, getPosts } from '../../services/sendGraphRequest';
 import { GetPostDetails } from '../../types/PostType';
 
@@ -22,7 +23,7 @@ const PostDetailsPage: NextPage<Props> = ({ post }) => {
                     <div className="col-span-1 lg:col-span-8">
                         <PostDetails post={post} />
                         <Author author={post.author} />
-                        {/* <AdjacentPosts slug={post.slug} createdAt={post.createdAt} /> */}
+                        <AdjacentPosts slug={post.slug} createdAt={post.createdAt} />
                         <CommentsForm slug={post.slug} />
                         <Comments slug={post.slug} />
                     </div>

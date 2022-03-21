@@ -7,4 +7,6 @@ export { default as PostDetails } from './postDetails/PostDetails';
 export { default as Author } from './author/Author';
 export { default as Comments } from './comments/Comments';
 export { default as CommentsForm } from './commentsForm/CommentsForm';
+export { default as AdjacentPostCard } from './adjacentPostCard/AdjacentPostCard';
 export { default as Loader } from './loader/Loader';
+export { default as FeaturedPostCard } from './featuredPostCard/FeaturedPostCard';

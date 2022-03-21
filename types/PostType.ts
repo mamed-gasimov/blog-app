@@ -34,3 +34,18 @@ export type GetPostsNodeAuthorType = {
         url: string;
     };
 }
+
+export type FeaturedPost = {
+    author: {
+        name: string;
+        photo: {
+            url: string;
+        }
+    }
+    featuredImage: {
+        url: string;
+    }
+    title: string;
+    slug: string;
+    createdAt: string;
+}
