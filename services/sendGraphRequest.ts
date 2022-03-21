@@ -1,6 +1,7 @@
 import { request, gql } from 'graphql-request';
 import { CategoryType } from '../types/CategoryType';
 import { SubmitCommentType } from '../types/CommentTypes';
+import { GetCategoryPost } from '../types/GetCategoryPost';
 import { GetPostDetails, GetPostType } from '../types/PostType';
 
 const graphqlAPI = process.env.ENDPOINT_URL as string;
@@ -145,7 +146,7 @@ export const getCategories = async () => {
   `;
 
     const result = await request(graphqlAPI, query);
-    return result.categories;
+    return result.categories as CategoryType[];
   } catch (error) {
     console.log(error);
   }
@@ -182,6 +183,46 @@ export const getComments = async (slug: string) => {
 
     const result = await request(graphqlAPI, query, { slug });
     return result.comments;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getCategoryPost = async (slug: string) => {
+  try {
+    const query = gql`
+    query GetCategoryPost($slug: String!) {
+      postsConnection(where: { categories_some: { slug: $slug } }) {
+        edges {
+          cursor
+          node {
+            author {
+              bio
+              name
+              id
+              photo {
+                url
+              }
+            }
+            createdAt
+            slug
+            title
+            excerpt
+            featuredImage {
+              url
+            }
+            categories {
+              name
+              slug
+            }
+          }
+        }
+      }
+    }
+  `;
+
+    const result = await request(graphqlAPI, query, { slug });
+    return result.postsConnection.edges as GetCategoryPost;
   } catch (error) {
     console.log(error);
   }

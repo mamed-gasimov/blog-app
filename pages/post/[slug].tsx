@@ -1,5 +1,6 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import { Author, Categories, PostDetails, PostWidget, CommentsForm, Comments } from '../../components';
+import { useRouter } from 'next/router';
+import { Author, Categories, PostDetails, PostWidget, CommentsForm, Comments, Loader } from '../../components';
 import { getPostDetails, getPosts } from '../../services/sendGraphRequest';
 import { GetPostDetails } from '../../types/PostType';
 
@@ -8,6 +9,12 @@ interface Props {
 }
 
 const PostDetailsPage: NextPage<Props> = ({ post }) => {
+    const router = useRouter();
+
+    if (router.isFallback) {
+        return <Loader />;
+    }
+
     return (
         <>
             <div className="container mx-auto px-10 mb-8">

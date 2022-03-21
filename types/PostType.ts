@@ -22,8 +22,8 @@ export interface GetPostDetails extends GetPostNodeType {
 }
 
 type GetPostsNodeCategoryType = {
-    name: string;
-    slug: string;
+    name?: string;
+    slug?: string;
 }
 
 export type GetPostsNodeAuthorType = {
